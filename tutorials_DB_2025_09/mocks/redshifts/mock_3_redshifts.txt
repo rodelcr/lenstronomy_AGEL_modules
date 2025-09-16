@@ -1,0 +1,1 @@
+redshift_list: [0.5, 1.2, 2]

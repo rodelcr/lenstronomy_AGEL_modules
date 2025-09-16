@@ -1,0 +1,27 @@
+# /bin/csh 
+# ----------------Parameters---------------------- #
+#$ -S /bin/csh
+#$ -pe mpich 22
+#$ -l s_cpu=36:00:00
+#$ -l h_data=1G,h_vmem=1G
+#$ -cwd
+#$ -j y
+#$ -N DCLS0353_double_source_F200LP_V18_run_11
+#$ -o DCLS0353_double_source_F200LP_V18_run_11.log
+#$ -m ea
+#$ -M duncan.bowden@cfa.harvard.edu
+#
+# ----------------Modules------------------------- #
+module load tools/python/3.11
+module load tools/python/use-single-thread
+module load gcc/11.2/mvapich
+#
+# ----------------Your Commands------------------- #
+#
+echo + `date` job $JOB_NAME started in $QUEUE with jobID=$JOB_ID on $HOSTNAME
+echo + NSLOTS = $NSLOTS distributed over:sort $TMPDIR/machines | uniq -c
+#
+source /pool/public/sao/dbowden/Compound/lenstronomy1.12.4_venv/bin/activate.csh
+mpirun -np $NSLOTS -machinefile $TMPDIR/machines python -u model_fitting_sequence_V9.py DCLS0353_double_source_F200LP_V18_run_11
+#
+echo = `date` job $JOB_NAME done
