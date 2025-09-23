@@ -1,0 +1,16 @@
+redshift_list: [0.184, 1.885, 2.38]
+lens_model_list: ['EPL', 'SHEAR_GAMMA_PSI', 'SIS', 'EPL']
+kwargs_lens: [{'theta_E': 1.74, 'gamma': 2.01, 'center_x': 0.287, 'center_y': 0.261, 'e1': 0.2, 'e2': 0}, {'gamma_ext': 0.07, 'psi_ext': -24.700847167862154, 'ra_0': 0, 'dec_0': 0}, {'theta_E': 0.1, 'center_x': -1, 'center_y': 9}, {'theta_E': 0.359, 'gamma': 2, 'e1': 0.17, 'e2': -0.24, 'center_x': -0.05, 'center_y': -0.15}]
+source_model_list: ['SERSIC_ELLIPSE', 'SERSIC_ELLIPSE']
+kwargs_source: [{'amp': 14, 'R_sersic': 0.21, 'n_sersic': 3, 'e1': 0.17, 'e2': -0.24, 'center_x': -0.05, 'center_y': -0.15}, {'amp': 200, 'R_sersic': 0.05, 'n_sersic': 10, 'e1': 0, 'e2': 0, 'center_x': 1.6, 'center_y': 0.8}]
+lens_light_model_list: ['SERSIC_ELLIPSE']
+kwargs_lens_light: [{'amp': 5.5, 'R_sersic': 1.9, 'n_sersic': 4.9, 'center_x': 0.287, 'center_y': 0.261, 'e1': 0.2, 'e2': 0}]
+cosmo: {'Om': 0.3, 'w': -1, 'H0': 70}
+background_rms: 0.004
+exp_time: 500.0
+numPix: 150
+pixel_scale: 0.05
+ra_at_xy_0: -3.725
+dec_at_xy_0: -3.725
+transform_pix2angle: [[0.05 0.  ]
+ [0.   0.05]]
