@@ -726,10 +726,34 @@ def configure_model_and_run(job_name, sampling_inputs, fitting_kwargs_list=None,
         if verbose:
             print('updated fitting_kwargs_list', fitting_kwargs_list)
     
+    # if cluster_compute is True:
+    #     path2input_temp = os.path.join(base_path, 'midway_temp', input_temp)
+    #     dir_path_cluster = '/pool/public/sao/dbowden/Compound/DCLS0353' #### NEED TO GENERALIZE. 
+    #     path2input_cluster = os.path.join(dir_path_cluster, 'local_temp', input_temp)
+
+    #     f = open(path2input_temp,'wb')
+    #     pickle.dump([fitting_kwargs_list, kwargs_data_joint, kwargs_model, kwargs_constraints, kwargs_likelihood, kwargs_params, init_samples], f)
+    #     f.close()
+    #     time.sleep(2)
+
+    #     # copying .txt to remote cluster with model and fitting info
+    #     ssh_client = paramiko.SSHClient()
+    #     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    #     ssh_client.connect(hostname=None, username=None, password=None) 
+    #     ftp_client = ssh_client.open_sftp()
+    #     ftp_client.put(path2input_temp, path2input_cluster)
+    #     ftp_client.put(base_path+'/jobs/DCLS0353_double_source_F200LP_V18.job', dir_path_cluster+'/DCLS0353_double_source_F200LP_V18.job')  # update job file before executing this
+    #     ftp_client.close()
+    #     ssh_client.close()
+
+    #     print('File %s uploaded to cluster' %path2input_cluster)
+    #     print('Must run job on cluster with jobname {} and job file {}'.format(job_name, job_name[:-7]+'.job'))
+
     if cluster_compute is True:
-        path2input_temp = os.path.join(base_path, 'midway_temp', input_temp)
-        dir_path_cluster = '/pool/public/sao/dbowden/Compound/DCLS0353' #### NEED TO GENERALIZE. 
-        path2input_cluster = os.path.join(dir_path_cluster, 'local_temp', input_temp)
+        print('Selected Cluster Compute. Preparing input file for cluster...')
+        path2input_temp = os.path.join(base_path, 'local_temp', input_temp)
+        #dir_path_cluster = '/pool/public/sao/dbowden/Compound/DCLS0353'
+        #path2input_cluster = os.path.join(dir_path_cluster, 'local_temp', input_temp)
 
         f = open(path2input_temp,'wb')
         pickle.dump([fitting_kwargs_list, kwargs_data_joint, kwargs_model, kwargs_constraints, kwargs_likelihood, kwargs_params, init_samples], f)
@@ -737,17 +761,17 @@ def configure_model_and_run(job_name, sampling_inputs, fitting_kwargs_list=None,
         time.sleep(2)
 
         # copying .txt to remote cluster with model and fitting info
-        ssh_client = paramiko.SSHClient()
-        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_client.connect(hostname=None, username=None, password=None) 
-        ftp_client = ssh_client.open_sftp()
-        ftp_client.put(path2input_temp, path2input_cluster)
-        ftp_client.put(base_path+'/jobs/DCLS0353_double_source_F200LP_V18.job', dir_path_cluster+'/DCLS0353_double_source_F200LP_V18.job')  # update job file before executing this
-        ftp_client.close()
-        ssh_client.close()
+        #ssh_client = paramiko.SSHClient()
+        #ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        #ssh_client.connect(hostname=None, username=None, password=None) 
+        #ftp_client = ssh_client.open_sftp()
+        #ftp_client.put(path2input_temp, path2input_cluster)
+        #ftp_client.put(base_path+'/jobs/DCLS0353_double_source_F200LP_V18.job', dir_path_cluster+'/DCLS0353_double_source_F200LP_V18.job')  # update job file before executing this
+        #ftp_client.close()
+        #ssh_client.close()
 
-        print('File %s uploaded to cluster' %path2input_cluster)
-        print('Must run job on cluster with jobname {} and job file {}'.format(job_name, job_name[:-7]+'.job'))
+        print('Must run job on cluster with job file {}'.format(job_name, job_name[:-7]+'.job'))
+        
     else:
         path2input_temp = os.path.join(base_path, 'local_temp', input_temp)
 
@@ -779,6 +803,7 @@ def configure_model_and_run(job_name, sampling_inputs, fitting_kwargs_list=None,
         print('============ CONGRATULATIONS, YOUR JOB WAS SUCCESSFUL ================ ')
 
         return fitting_seq 
+
 
 
 
