@@ -386,6 +386,23 @@ def position_modeling_calculation(plot_model_prediction = False, plot_convergenc
         lens_plot.lens_model_plot(ax, lensModel=lensModel_s1, kwargs_lens=kwargs_fit_s1, numPix=110,deltaPix=0.05, sourcePos_x=s1_x, sourcePos_y=s1_y, point_source=True, with_caustics=True, fast_caustic=True, coord_inverse=False)
         plt.show()
 
+    if not source2:
+            out = {
+            'ra_image_s1_pred': ra_image_s1_pred,
+            'dec_image_s1_pred': dec_image_s1_pred,
+            'center_x_pred': kwargs_fit_s1[0]['center_x'],
+            'center_y_pred': kwargs_fit_s1[0]['center_y'],
+            's1_x_pred': s1_x,
+            's1_y_pred': s1_y,
+            'theta_E_lens_pred': kwargs_fit_s1[0]['theta_E'],
+            'e1_lens_pred': kwargs_fit_s1[0]['e1'],
+            'e2_lens_pred': kwargs_fit_s1[0]['e2'],
+            'gamma1_ext_pred': kwargs_fit_s1[1]['gamma1'],
+            'gamma2_ext_pred': kwargs_fit_s1[1]['gamma2'],
+            }
+            
+            return out
+    
     if source2:
         lens_model_list_mp = ['SIE','SHEAR','SIE'] 
 
