@@ -65,7 +65,7 @@ f.close()
 start_time = time.time()
 fitting_seq = FittingSequence(kwargs_data_joint, kwargs_model, kwargs_constraints, kwargs_likelihood, kwargs_params, mpi=True, verbose=True)
 
-fit_output = fitting_seq.fit_sequence(fitting_kwargs_list)
+fit_output = fitting_seq.fit_sequence(fitting_kwargs_list) #problem
 kwargs_result = fitting_seq.best_fit(bijective=False)
 multi_band_list_out = fitting_seq.multi_band_list
 kwargs_fixed_out = fitting_seq._updateManager.fixed_kwargs 
